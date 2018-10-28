@@ -1,35 +1,54 @@
+phoneScreen = new Layer
+  width: 1440
+  height: 2960
+  x: Align.center()
+  y: Align.center()
+  backgroundColor: "transparent"
+
 phoneCanvas = new Layer
+  parent: phoneScreen
   width: 1440 - 10
   height: 2960 - 10
   x: Align.center()
   y: Align.center()
 
-canvasBorder = new Border
-
 class Border extends Layer
-  constructor: (options) ->
-      super options
+  constructor: (options = {}) ->
+    super _.defaults options,
+        backgroundColor: "transparent"
+    @size = @parent.size
 
-      @left = new Layer
-        x: Align.left()
-        y: 0
-        width: 10
-        height: phoneCanvas.height
-      
-      @right = new Layer
-        x: Align.right()
-        y: 0
-        width: 10
-        height: phoneCanvas.height
+    @left = new Layer
+      parent: @
+      x: Align.left()
+      y: Align.center()
+      width: 10
+      height: @height
+      backgroundColor: "red"
+    
+    @right = new Layer
+      parent: @
+      x: Align.right()
+      y: Align.center()
+      width: 10
+      height: @height
+      backgroundColor: "red"
 
-      @top = new Layer
-        x: 0
-        y: Align.top()
-        width: phoneCanvas.width
-        height: 10
+    @top = new Layer
+      parent: @
+      x: Align.center()
+      y: Align.top()
+      width: @width
+      height: 10
+      backgroundColor: "red"
 
-      @bottom = new Layer
-        x: 0
-        y: Align.bottom()
-        width: phoneCanvas.width
-        height: 10
+    @bottom = new Layer
+      parent: @
+      x: Align.center()
+      y: Align.bottom()
+      width: @width
+      height: 10
+      backgroundColor: "red"
+
+canvasBorder = new Border
+  parent: phoneScreen
